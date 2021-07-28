@@ -9,24 +9,26 @@ class UserService
     public function get($id = null)
     {
         if ($id) {
-            return User::find($id);
+            return User::getUser($id);
         } else {
-            return User::findAll();
+            return User::getAllUsers();
         }
     }
 
     public function post()
     {
-        # code...
+        $data = file_get_contents("php://input");
+        return User::storeUser($data);
     }
 
-    public function update()
+    public function put($id)
     {
-        # code...
+        $data = file_get_contents("php://input");
+        return User::updateUser($id, $data);
     }
 
     public function delete()
     {
-        # code...
+        return User::deleteUser($_POST);
     }
 }
